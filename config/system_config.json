@@ -1,0 +1,63 @@
+{
+  "system": {
+    "name": "Tech-Interactives Military Grade Radar System",
+    "version": "1.0.0",
+    "author": "Akhilesh TU",
+    "organization": "Tech-Interactives",
+    "debug_mode": false
+  },
+  "receivers": [
+    {
+      "id": 1,
+      "ip": "192.168.1.101",
+      "port": 5002,
+      "position": {
+        "x": -5,
+        "y": 0,
+        "z": -5
+      },
+      "enabled": true,
+      "description": "RX-1 (NW)"
+    },
+    {
+      "id": 2,
+      "ip": "192.168.1.102",
+      "port": 5002,
+      "position": {
+        "x": 5,
+        "y": 0,
+        "z": -5
+      },
+      "enabled": true,
+      "description": "RX-2 (NE)"
+    }
+  ],
+  "detection": {
+    "presence_threshold": 0.6,
+    "motion_threshold": 100,
+    "window_size": 100
+  },
+  "signal_processing": {
+    "window_size": 100,
+    "filter_order": 4
+  },
+  "localization": {
+    "receiver_positions": {
+      "1": {"x": -5, "y": 0, "z": -5},
+      "2": {"x": 5, "y": 0, "z": -5}
+    }
+  },
+  "breathing": {
+    "min_breathing_rate": 8,
+    "max_breathing_rate": 30
+  },
+  "tracking": {
+    "max_tracks": 10,
+    "track_timeout": 5.0
+  },
+  "network": {
+    "backend_host": "0.0.0.0",
+    "backend_port": 5000,
+    "websocket_port": 5001
+  }
+}

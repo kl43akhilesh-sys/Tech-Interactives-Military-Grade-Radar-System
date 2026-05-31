@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech-Interactives Military Grade Radar</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">⚡ Tech-Interactives</div>
+            <div class="title">Military Grade Radar System</div>
+            <div class="status" id="status">● Connecting...</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <div id="canvas"></div>
+                <div class="controls">
+                    <button onclick="resetView()">Reset View</button>
+                    <button onclick="calibrate()">Calibrate</button>
+                    <button onclick="toggleSettings()">Settings</button>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="panel-section">
+                    <h3>📊 Signal Metrics</h3>
+                    <div class="metric">
+                        <span>RSSI:</span>
+                        <span id="rssi">-75 dBm</span>
+                    </div>
+                    <div class="metric">
+                        <span>Quality:</span>
+                        <span id="quality">50%</span>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>👥 Detection</h3>
+                    <div class="metric">
+                        <span>Presence:</span>
+                        <span id="presence">No</span>
+                    </div>
+                    <div class="metric">
+                        <span>Motion:</span>
+                        <span id="motion">0%</span>
+                    </div>
+                    <div class="metric">
+                        <span>Breathing:</span>
+                        <span id="breathing">0 bpm</span>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>📡 Receivers</h3>
+                    <div id="receivers">Loading...</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <span id="message">Connected</span>
+            <span id="time"></span>
+        </footer>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

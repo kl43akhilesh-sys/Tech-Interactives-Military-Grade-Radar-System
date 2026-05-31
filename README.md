@@ -1,311 +1,155 @@
 # Tech-Interactives Military Grade Radar System
 
-**Created by Tech-Interactives**  
-**Founder: Akhilesh TU**
+**Version:** 1.0.0  
+**Author:** Akhilesh TU  
+**Organization:** Tech-Interactives
 
 ## Overview
 
-The **Tech-Interactives Military Grade Radar System** is a cutting-edge WiFi CSI-based human sensing and localization platform. It leverages Channel State Information (CSI) from WiFi signals to detect presence, track motion, count persons, estimate breathing patterns, and provide real-time 3D visualization in a tactical command center interface.
+A complete WiFi CSI-based human sensing and detection system using ESP32 boards with a router.
 
-### Key Features
+## Quick Start (5 Minutes)
 
-✅ **Presence Detection** - Detect humans in coverage area  
-✅ **Motion Detection** - Real-time motion tracking and analysis  
-✅ **Human Localization** - Estimate position within monitored zone  
-✅ **Person Counting** - Automatic occupancy estimation  
-✅ **Breathing Detection** - Non-contact vital sign monitoring  
-✅ **Multi-Zone Tracking** - Track movement across defined zones  
-✅ **3D Visualization** - Real-time tactical dashboard with Three.js  
-✅ **Scalable Architecture** - Support for multi-receiver expansion  
-✅ **Health Monitoring** - Network diagnostics and receiver status  
-✅ **Calibration System** - Guided baseline signal establishment  
-✅ **AI-Ready Framework** - Support for ONNX model integration  
-✅ **Desktop Application** - PySide6-based local dashboard  
-
-## System Architecture
-
-### Current Topology
-```
-             WiFi Router
-                  ▲
-                 / \
-                /   \
-               /     \
-              /       \
-          ESP32-TX   ESP32-RX1
-                      (RX2 ready)
-```
-
-### Future Topology
-```
-             WiFi Router
-                ▲
-            /   |   \
-           /    |    \
-       RX1     RX2    RX3
-                |      |
-               RX4    RX5
-```
-
-## Hardware Requirements
-
-- **1x WiFi Router** (2.4GHz capable)
-- **2x ESP32-WROOM-32** development boards
-- **USB-C Cables** for programming and power
-- **Breadboard and Jumper Wires** (optional, for permanent setup)
-
-## Software Stack
-
-- **Firmware**: Arduino/ESP-IDF (C++)
-- **Backend**: Python 3.14
-- **Frontend**: HTML5, CSS3, JavaScript, Three.js
-- **Desktop**: PySide6
-- **Visualization**: Three.js 3D Engine
-- **Communication**: WebSocket, TCP, UDP, Serial
-
-## Quick Start
-
-### 1. Prerequisites
-- Windows 11
-- Python 3.14+
-- Arduino IDE 2.0+
-- Git
-
-### 2. Installation
+### 1. Install
 ```bash
 git clone https://github.com/kl43akhilesh-sys/Tech-Interactives-Military-Grade-Radar-System.git
 cd Tech-Interactives-Military-Grade-Radar-System
 .\install.bat
 ```
 
-### 3. Hardware Setup
-- Flash TX firmware to first ESP32
-- Flash RX firmware to second ESP32
-- Connect both to WiFi network
-- See [HARDWARE_SETUP.md](docs/HARDWARE_SETUP.md) for details
+### 2. Configure WiFi in Firmware
+Edit `firmware/ESP32_RECEIVER.ino`:
+```cpp
+const char* WIFI_SSID = "YOUR_WIFI_SSID";
+const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
+const char* BACKEND_IP = "192.168.1.100";  // Your PC IP
+const int RECEIVER_ID = 1;  // Change to 2, 3, etc. for additional receivers
+```
+
+### 3. Flash to ESP32 Boards
+- Open Arduino IDE 2.0+
+- Board: ESP32 > DOIT ESP32 DEVKIT V1
+- Upload `firmware/ESP32_RECEIVER.ino` to each ESP32
+- For each new receiver, change `RECEIVER_ID` in code
 
 ### 4. Start System
 ```bash
 .\start_all.bat
 ```
 
-Dashboard opens at: `http://localhost:5000`
+### 5. Access Dashboard
+**Browser:** http://localhost:5000
 
-## Documentation
+## Features
 
-| Document | Purpose |
-|----------|----------|
-| [INSTALL.md](docs/INSTALL.md) | Complete installation guide |
-| [HARDWARE_SETUP.md](docs/HARDWARE_SETUP.md) | Hardware assembly and wiring |
-| [NETWORK_SETUP.md](docs/NETWORK_SETUP.md) | WiFi network configuration |
-| [CALIBRATION_GUIDE.md](docs/CALIBRATION_GUIDE.md) | Signal baseline calibration |
-| [API_REFERENCE.md](docs/API_REFERENCE.md) | Backend API documentation |
-| [DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md) | Development workflow |
-| [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Common issues and solutions |
-| [UPGRADE_GUIDE.md](docs/UPGRADE_GUIDE.md) | Scaling and expansion guide |
-| [FAQ.md](docs/FAQ.md) | Frequently asked questions |
-
-## Quick Navigation
-
-- 📖 **New to the system?** Start with [INSTALL.md](docs/INSTALL.md)
-- ⚙️ **Setting up hardware?** Read [HARDWARE_SETUP.md](docs/HARDWARE_SETUP.md)
-- 🔧 **Configuring network?** See [NETWORK_SETUP.md](docs/NETWORK_SETUP.md)
-- 📊 **Getting started with calibration?** Check [CALIBRATION_GUIDE.md](docs/CALIBRATION_GUIDE.md)
-- 🐛 **Something not working?** See [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
-- 🚀 **Expanding the system?** Read [UPGRADE_GUIDE.md](docs/UPGRADE_GUIDE.md)
-- 🤔 **Got questions?** Check [FAQ.md](docs/FAQ.md)
-- 👨‍💻 **Contributing code?** See [DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md)
-- 📡 **Using the API?** Review [API_REFERENCE.md](docs/API_REFERENCE.md)
-
-## Repository Structure
-
-```
-Tech-Interactives-Military-Grade-Radar-System/
-├── firmware/                      # ESP32 firmware
-│   ├── tx/                       # Transmitter firmware
-│   ├── rx/                       # Receiver firmware
-│   └── shared/                   # Shared libraries
-├── backend/                      # Python backend
-│   ├── csi_reader.py            # CSI data acquisition
-│   ├── signal_processor.py       # Signal processing
-│   ├── presence_detector.py      # Presence detection
-│   ├── motion_detector.py        # Motion detection
-│   ├── localization_engine.py    # Position estimation
-│   ├── tracking_engine.py        # Multi-object tracking
-│   ├── breathing_detector.py     # Vital sign analysis
-│   ├── person_counter.py         # Occupancy counting
-│   ├── receiver_manager.py       # Receiver coordination
-│   ├── router_manager.py         # Router communication
-│   ├── network_manager.py        # Network operations
-│   ├── settings_manager.py       # Configuration management
-│   ├── diagnostics.py            # System diagnostics
-│   ├── data_logger.py            # Data recording
-│   ├── api_server.py             # REST API
-│   ├── websocket_server.py       # WebSocket server
-│   └── main.py                   # Entry point
-├── frontend/                     # Web dashboard
-│   ├── index.html               # Main dashboard
-│   ├── style.css                # Styling
-│   ├── app.js                   # Application logic
-│   ├── dashboard.js             # Dashboard manager
-│   ├── three_scene.js           # 3D visualization
-│   ├── websocket_client.js      # Real-time updates
-│   ├── settings_panel.js        # Settings interface
-│   ├── zone_map.js              # Zone mapping
-│   └── human_tracker.js         # Tracking visualization
-├── desktop/                      # PySide6 desktop application
-│   ├── main_window.py           # Main window
-│   ├── dashboard_widget.py      # Dashboard widget
-│   ├── settings_widget.py       # Settings widget
-│   └── run.py                   # Desktop app entry
-├── models/                       # AI models directory
-│   ├── presence_model.onnx      # Presence detection model
-│   ├── motion_model.onnx        # Motion detection model
-│   ├── localization_model.onnx  # Localization model
-│   └── tracking_model.onnx      # Tracking model
-├── assets/                       # 3D models and media
-│   ├── models/
-│   ├── icons/
-│   ├── sounds/
-│   └── fonts/
-├── config/                       # Configuration files
-│   ├── system_config.json       # System configuration
-│   ├── receiver_config.json     # Receiver settings
-│   ├── network_config.json      # Network settings
-│   └── ai_config.json           # AI model settings
-├── docs/                         # Documentation
-├── scripts/                      # Installation and utility scripts
-├── tests/                        # Unit and integration tests
-├── requirements.txt              # Python dependencies
-├── install.bat                   # Windows installer
-├── setup.ps1                     # PowerShell setup
-├── start_all.bat                 # System startup
-└── .gitignore                    # Git ignore rules
-```
-
-## System Data Flow
-
-```
-WiFi Router (CSI Source)
-        ↓
-ESP32-TX (Transmits packets)
-        ↓
-ESP32-RX1/RX2 (Capture CSI)
-        ↓
-Python Backend (Central Intelligence)
-        ├── CSI Reader (Data acquisition)
-        ├── Signal Processor (Filtering & Feature extraction)
-        ├── Motion Detector (Movement analysis)
-        ├── Presence Detector (Human presence)
-        ├── Localization Engine (Position estimation)
-        ├── Breathing Detector (Vital signs)
-        ├── Tracking Engine (Multi-object tracking)
-        └── Person Counter (Occupancy estimation)
-        ↓
-WebSocket Server (Real-time distribution)
-        ↓
-┌───────┴──────────────┬──────────────┐
-│                      │              │
-Web Dashboard    Desktop App    REST API
-(Three.js 3D)    (PySide6)    (JSON)
-```
-
-## Key Capabilities
-
-### Presence Detection
-- Real-time human presence detection
-- Confidence scoring
-- Multi-zone support
-- Configurable sensitivity
-
-### Motion Analysis
-- Movement detection and intensity
-- Motion direction estimation
-- Speed calculation
-- Motion trails visualization
-
-### Localization
-- WiFi fingerprinting
-- Signal triangulation
-- Position estimation in 2D space
-- Zone-based classification
-
-### Person Counting
-- Automatic occupancy estimation
-- Multi-person tracking
-- Person entry/exit detection
-- Crowd density estimation
-
-### Breathing Detection
-- Non-contact vital sign monitoring
-- Breathing rate extraction
-- Heart rate motion estimation
-- Signal quality assessment
-
-### Network Diagnostics
-- Receiver health monitoring
-- Packet loss detection
-- Signal quality metrics
-- Network latency tracking
-- CSI sample rate monitoring
+✅ Real-time presence detection  
+✅ Motion analysis and tracking  
+✅ Human localization  
+✅ Person counting  
+✅ Breathing detection  
+✅ 3D visualization  
+✅ Multi-receiver support (2-5+ boards)  
+✅ Web dashboard  
+✅ REST API  
+✅ System diagnostics  
 
 ## Configuration
 
-All system settings are managed through:
-1. **Web Settings Panel** - Browser-based configuration
-2. **Configuration Files** - JSON-based settings
-3. **Environment Variables** - System-level configuration
-4. **Calibration Wizard** - Guided setup process
+Edit `config/system_config.json`:
 
-## Scalability
+```json
+{
+  "receivers": [
+    {"id": 1, "ip": "192.168.1.101"},
+    {"id": 2, "ip": "192.168.1.102"}
+  ]
+}
+```
 
-The system is designed to scale from 2 receivers to 5+ receivers:
+## System Requirements
 
-- **Phase 1**: TX + RX1 (Current)
-- **Phase 2**: TX + RX1 + RX2 (Dual receiver)
-- **Phase 3**: TX + RX1 + RX2 + RX3 (Triangle configuration)
-- **Phase 4**: TX + RX1-RX5 (Multi-receiver array)
+- Windows 11 / Linux / macOS
+- Python 3.14+
+- 2x ESP32-WROOM-32 boards (or more)
+- WiFi 2.4GHz router
+- 4GB RAM, 2GB disk space
 
-No code changes required—only configuration updates.
+## Hardware Setup
 
-## AI Integration
+**No wiring required.** Just:
+1. Connect ESP32s to USB power (or breadboard power)
+2. Program via USB cable (Arduino IDE)
+3. Both boards connect to WiFi automatically
 
-The system supports ONNX model integration for:
-- Presence detection
-- Motion classification
-- Localization refinement
-- Breathing pattern analysis
-- Advanced tracking
+## Adding More Receivers
 
-Custom models can be trained and deployed without code modification.
+1. Flash same firmware to new ESP32
+2. Change `RECEIVER_ID` in firmware (1, 2, 3, etc.)
+3. Add to `config/system_config.json`
+4. Restart backend
+5. Dashboard auto-detects new receiver
 
-## Performance Specifications
+## Network Setup
 
-| Metric | Value |
-|--------|-------|
-| CSI Sample Rate | 100+ Hz |
-| Detection Latency | <500ms |
-| Localization Accuracy | ±1-2m |
-| Person Counting | ±1 person |
-| Breathing Detection | 8-20 breaths/min |
-| Maximum Range | ~20m (in-room) |
-| Processing CPU | <30% on modern hardware |
-| Memory Usage | <500MB |
+**Find your PC IP:**
+```bash
+# Windows
+ipconfig
 
-## Version
+# Linux/Mac  
+ifconfig
+```
 
-**v1.0.0** - Initial Release
-- Core WiFi CSI sensing
-- Real-time 3D visualization
-- Multi-zone detection
-- Breathing analysis
-- AI-ready architecture
-- Desktop application
-- Comprehensive documentation
+Update in firmware:
+```cpp
+const char* BACKEND_IP = "192.168.1.100";  // Your IP here
+```
 
----
+## API Endpoints
 
-**Tech-Interactives**: Building the future of WiFi sensing.  
-**Created by Akhilesh TU**
+- `GET /api/system/info` - System info
+- `GET /api/receivers` - Receiver status
+- `GET /api/diagnostics` - System health
+- `GET /api/settings` - Configuration
 
-For detailed setup and usage, see the documentation in the `docs/` folder.
+## Troubleshooting
+
+**ESP32 not detected?**
+- Install CH340/CP2102 driver
+- Try different USB cable
+- Restart Arduino IDE
+
+**No WiFi connection?**
+- Check SSID and password
+- Verify 2.4GHz WiFi available
+- Check board is flashed correctly
+
+**Backend not connecting?**
+- Verify backend IP in firmware matches your PC
+- Check firewall allows port 5002
+- Ensure backend is running (`python backend/main.py`)
+
+## Documentation
+
+See `docs/` folder for complete guides:
+- INSTALL.md - Installation
+- HARDWARE_SETUP.md - Hardware guide
+- API_REFERENCE.md - API documentation
+- FAQ.md - Frequently asked questions
+
+## Support
+
+**Email:** kl.43akhilesh@gmail.com  
+**GitHub Issues:** Report problems
+
+## Future Features
+
+- Mobile app
+- Cloud integration
+- Advanced AI models
+- More ESP32 variants
+
+## Credits
+
+Created by Tech-Interactives  
+Founder: Akhilesh TU

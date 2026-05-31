@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PIPFILE.lock
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+python-env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+*.log
+logs/
+
+# Data
+data/
+calibration_data/
+recordings/
+*.csv
+*.json.bak
+
+# Arduino
+build/
+*.hex
+*.bin
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Sensitive
+.env
+.env.local
+config/system_config.local.json
+config/network_config.local.json
+
+# Node (for future frontend builds)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Temporary
+*.tmp
+*.temp
+.cache/

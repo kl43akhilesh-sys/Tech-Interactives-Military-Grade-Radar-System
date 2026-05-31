@@ -1,0 +1,31 @@
+# Development Dependencies
+-r requirements.txt
+
+# Testing
+pytest-xdist==3.5.0
+pytest-mock==3.12.0
+faker==21.0.0
+
+# Code Quality
+pylint==3.0.3
+flake8-docstrings==1.7.0
+flake8-bugbear==23.12.2
+bandit==1.7.5
+
+# Performance Profiling
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# API Documentation
+flasgger==0.9.7.1
+
+# Development Utilities
+ipython==8.18.1
+ipdb==0.13.13
+
+# Build
+build==1.0.3
+wheel==0.42.0
+
+# Version Management
+bump2version==1.0.1
